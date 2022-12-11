@@ -23,3 +23,6 @@ Route::group(['prefix' =>'cart' , 'middleware' => 'jwtAuth'] , function (){
     Route::post('update' , [\App\Http\Controllers\CartController::class , 'updateCart']);
     Route::get('show ' , [\App\Http\Controllers\CartController::class , 'userCart']);
 });
+
+
+Route::post('checkout' , [\App\Http\Controllers\OrdersController::class , 'checkOut']);
