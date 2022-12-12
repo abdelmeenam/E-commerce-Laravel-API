@@ -14,13 +14,6 @@ class OrderCartValidation implements Rule
      */
     public function __construct()
     {
-        $cartItems = Cart::where('user_id' , auth()->user()->id)->with('product')->get();
-        foreach ($cartItems as $cartItem){
-            if ($cartItem->product->stock <=  $cartItem->count){
-                return  false;
-            }
-        }
-        return true;
     }
 
     /**
@@ -32,7 +25,20 @@ class OrderCartValidation implements Rule
      */
     public function passes($attribute, $value)
     {
-        //
+        $cartItems = Cart::where('user_id' , auth()->user()->id)->with('product')->get();
+        if ( count( $cartItems) == 0)
+        {
+            return false;
+        }
+
+        foreach ($cartItems as $cartItem)
+        {
+            if (($cartItem->product->stock ) < $cartItem->count)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -42,6 +48,6 @@ class OrderCartValidation implements Rule
      */
     public function message()
     {
-        return 'Order failed!!...Selected product is out of stock';
+        return 'Order failed!!...Pleas select a valid product ';
     }
 }
