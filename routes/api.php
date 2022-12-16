@@ -12,11 +12,6 @@ Route::group(['prefix' =>'auth'] , function (){
     Route::post('login' , [\App\Http\Controllers\AuthController::class , 'Login']);
 });
 
-
-
-Route::get('products' , [\App\Http\Controllers\ProductsController::class , 'getAllProducts']);
-
-
 Route::group(['prefix' =>'cart' , 'middleware' => 'jwtAuth'] , function (){
     Route::post('add' , [\App\Http\Controllers\CartController::class , 'addToCart']);
     Route::post('delete' , [\App\Http\Controllers\CartController::class , 'deleteFromCart']);
@@ -24,5 +19,9 @@ Route::group(['prefix' =>'cart' , 'middleware' => 'jwtAuth'] , function (){
     Route::get('show ' , [\App\Http\Controllers\CartController::class , 'userCart']);
 });
 
-
 Route::post('checkout' , [\App\Http\Controllers\OrdersController::class , 'checkOut']);
+Route::get('products' , [\App\Http\Controllers\ProductsController::class , 'getAllProducts']);
+
+Route::get('/export-excel' ,[\App\Http\Controllers\ProductsController::class ,'export']);
+Route::post('/import-excel' ,[\App\Http\Controllers\ProductsController::class ,'import']);
+
