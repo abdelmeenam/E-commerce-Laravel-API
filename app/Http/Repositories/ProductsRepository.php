@@ -2,10 +2,12 @@
 
 namespace App\Http\Repositories;
 
+use App\Exports\ProductExport;
 use App\Http\Interfaces\ProductsInterface;
 use App\Http\Traits\ApiResponseTrait;
+use App\Imports\ProductImport;
 use App\Models\Product;
-use http\Env\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductsRepository implements ProductsInterface
 {
@@ -19,11 +21,17 @@ class ProductsRepository implements ProductsInterface
         return $this->apiResponse(200, 'All products', null, $products);
     }
 
-    public function export(){
-
+    public function  uploadProductsView(){
+        return view('products');
     }
 
-    public function import(Request $request){
+    public function uploadProducts($request){
+        Excel::import(new ProductImport , $request->file);
+        return redirect('/products')->with('success', 'All good!');
+    }
+
+    public function downloadProducts(){
+        return Excel::download(new ProductExport(), 'test.xlsx');
 
     }
 

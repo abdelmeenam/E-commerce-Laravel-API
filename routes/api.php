@@ -22,6 +22,6 @@ Route::group(['prefix' =>'cart' , 'middleware' => 'jwtAuth'] , function (){
 Route::post('checkout' , [\App\Http\Controllers\OrdersController::class , 'checkOut']);
 Route::get('products' , [\App\Http\Controllers\ProductsController::class , 'getAllProducts']);
 
-Route::get('/export-excel' ,[\App\Http\Controllers\ProductsController::class ,'export']);
-Route::post('/import-excel' ,[\App\Http\Controllers\ProductsController::class ,'import']);
+//Route::get('/export-excel' ,[\App\Http\Controllers\ProductsController::class ,'export']);
+//Route::post('/import-excel' ,[\App\Http\Controllers\ProductsController::class ,'import']);
 

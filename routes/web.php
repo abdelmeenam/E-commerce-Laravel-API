@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+Route::get('/products' ,[\App\Http\Controllers\ProductsController::class ,'uploadProductsView'])->name('products');
+Route::post('/products' ,[\App\Http\Controllers\ProductsController::class ,'uploadProducts'])->name('products-upload');
+Route::get('/download' ,[\App\Http\Controllers\ProductsController::class ,'downloadProducts'])->name('products-download');
+

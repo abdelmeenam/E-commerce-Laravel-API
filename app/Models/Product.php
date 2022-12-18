@@ -9,4 +9,14 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable =['name' ,'price' ,'stock' ];
+
+    public static function rules(){
+        return [
+            'name'=> 'required' ,
+            'price'=> 'required|min:2' ,
+            'stock'=> 'required|min:2' ,
+        ];
+    }
+
+
 }
